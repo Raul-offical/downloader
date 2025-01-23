@@ -32,9 +32,19 @@ jobs:
         run: |
           buildozer android debug
 
+          - name: Install dependencies
+  run: |
+    sudo apt update
+    sudo apt install -y python3-pip git openjdk-8-jdk
+    sudo apt install -y android-sdk android-ndk
+    pip install buildozer[android]
+
+          
+
       # Step 5: Upload the generated APK
       - name: Upload APK as artifact
         uses: actions/upload-artifact@v2
         with:
           name: apk
           path: bin/*.apk
+      
